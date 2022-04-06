@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,6 +17,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.net.Socket;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,16 +33,18 @@ public class MainActivity extends AppCompatActivity {
         binding=ActivityMainBinding.inflate(getLayoutInflater());
         View view=binding.getRoot();
         setContentView(view);
-        //setContentView(R.layout.activity_main);
+
         binding.connection.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try{
-                            clientSocket= new Socket("192.168.52.1",12355);
-
+                            Log.d("test","hello");
+                            clientSocket= new Socket("192.168.0.42",12355);
+                            Log.d("test","rana");
                         }
                         catch(IOException e){
                             e.printStackTrace();
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 }).start();
+                Log.d("test","reem");
                 Toast.makeText(
                         getApplicationContext(),"Intiating Connection", Toast.LENGTH_LONG).show();
 
